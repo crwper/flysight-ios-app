@@ -6,17 +6,17 @@
 //
 
 import SwiftUI
-import FlySightCore
+import FlySightCore // Ensure this is imported
 
 @main
 struct FlySightApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject var bluetoothManager = FlySightCore.BluetoothManager() // Correct: Use @StateObject
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(bluetoothManager: bluetoothManager) // Pass as an ObservedObject
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(FlySightCore.BluetoothManager())
         }
     }
 }

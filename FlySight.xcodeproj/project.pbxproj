@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C3B51CB2DDB00B8007C2081 /* AddDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3B51CA2DDB00B0007C2081 /* AddDeviceView.swift */; };
+		4C3B51CD2DDB00E2007C2081 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3B51CC2DDB00DF007C2081 /* ConnectView.swift */; };
+		4C3B51CF2DDB00FB007C2081 /* FileExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3B51CE2DDB00F8007C2081 /* FileExplorerView.swift */; };
+		4C3B51D12DDB0107007C2081 /* LiveDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3B51D02DDB0103007C2081 /* LiveDataView.swift */; };
+		4C3B51D32DDB0116007C2081 /* StartingPistolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3B51D22DDB010F007C2081 /* StartingPistolView.swift */; };
 		4C8D140E2C16270300C5B5A2 /* FlySightCore in Frameworks */ = {isa = PBXBuildFile; productRef = 4C8D140D2C16270300C5B5A2 /* FlySightCore */; };
 		4CE4E99D2BBF010E002E028E /* FlySightApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE4E99C2BBF010E002E028E /* FlySightApp.swift */; };
 		4CE4E99F2BBF010E002E028E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE4E99E2BBF010E002E028E /* ContentView.swift */; };
@@ -17,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C3B51CA2DDB00B0007C2081 /* AddDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeviceView.swift; sourceTree = "<group>"; };
+		4C3B51CC2DDB00DF007C2081 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
+		4C3B51CE2DDB00F8007C2081 /* FileExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExplorerView.swift; sourceTree = "<group>"; };
+		4C3B51D02DDB0103007C2081 /* LiveDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDataView.swift; sourceTree = "<group>"; };
+		4C3B51D22DDB010F007C2081 /* StartingPistolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingPistolView.swift; sourceTree = "<group>"; };
 		4CE4E9992BBF010E002E028E /* FlySight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlySight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE4E99C2BBF010E002E028E /* FlySightApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlySightApp.swift; sourceTree = "<group>"; };
 		4CE4E99E2BBF010E002E028E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +68,11 @@
 		4CE4E99B2BBF010E002E028E /* FlySight */ = {
 			isa = PBXGroup;
 			children = (
+				4C3B51D22DDB010F007C2081 /* StartingPistolView.swift */,
+				4C3B51D02DDB0103007C2081 /* LiveDataView.swift */,
+				4C3B51CE2DDB00F8007C2081 /* FileExplorerView.swift */,
+				4C3B51CC2DDB00DF007C2081 /* ConnectView.swift */,
+				4C3B51CA2DDB00B0007C2081 /* AddDeviceView.swift */,
 				4CE4E9AF2BBF3BB4002E028E /* Info.plist */,
 				4CE4E99C2BBF010E002E028E /* FlySightApp.swift */,
 				4CE4E99E2BBF010E002E028E /* ContentView.swift */,
@@ -155,8 +170,13 @@
 			files = (
 				4CE4E9A62BBF010F002E028E /* Persistence.swift in Sources */,
 				4CE4E99F2BBF010E002E028E /* ContentView.swift in Sources */,
+				4C3B51D12DDB0107007C2081 /* LiveDataView.swift in Sources */,
 				4CE4E99D2BBF010E002E028E /* FlySightApp.swift in Sources */,
+				4C3B51D32DDB0116007C2081 /* StartingPistolView.swift in Sources */,
+				4C3B51CD2DDB00E2007C2081 /* ConnectView.swift in Sources */,
+				4C3B51CB2DDB00B8007C2081 /* AddDeviceView.swift in Sources */,
 				4CE4E9A92BBF010F002E028E /* FlySight.xcdatamodeld in Sources */,
+				4C3B51CF2DDB00FB007C2081 /* FileExplorerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
