@@ -314,8 +314,10 @@ struct DownloadUploadProgressView: View {
             }
             .padding(20)
             .frame(minWidth: 280)
-            .background(Material.regular) // Use system material for background
-            .cornerRadius(15)
+            .background( // iOS 14 compatible background
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(Color(UIColor.systemGray4).opacity(0.85)) // Using a system color that adapts
+            )
             .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
             .transition(.scale.combined(with: .opacity)) // Nice transition
         }

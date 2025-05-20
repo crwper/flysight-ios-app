@@ -284,10 +284,3 @@ struct ConnectView_Previews: PreviewProvider {
         ConnectView(bluetoothManager: mockBm)
     }
 }
-
-// Make PeripheralInfo Hashable if not already, for .alert(item: ...)
-extension FlySightCore.PeripheralInfo: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
