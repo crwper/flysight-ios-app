@@ -12,7 +12,14 @@ struct ConnectView: View {
     @ObservedObject var bluetoothManager: FlySightCore.BluetoothManager
     @State private var isPresentingAddDeviceSheet = false
     @State private var peripheralToForget: FlySightCore.PeripheralInfo?
-    // No @State for showForgetAlert, directly use .alert(item: ...)
+
+    // Helper to determine if fully connected
+    private func isFullyConnected() -> Bool {
+        if case .connected = bluetoothManager.connectionState {
+            return true
+        }
+        return false
+    }
 
     var body: some View {
         NavigationView {
@@ -47,7 +54,7 @@ struct ConnectView: View {
                                 bluetoothManager: bluetoothManager,
                                 peripheralInfo: peripheralInfo,
                                 onForget: { infoToForget in
-                                    self.peripheralToForget = infoToForget // Triggers .alert(item: ...)
+                                    self.peripheralToForget = infoToForget
                                 }
                             )
                         }
@@ -62,7 +69,7 @@ struct ConnectView: View {
                         if bluetoothManager.currentScanMode == .knownDevices || bluetoothManager.connectionState == .scanningKnown {
                             bluetoothManager.stopScanning()
                         } else {
-                            bluetoothManager.loadKnownPeripheralsFromUserDefaults() // Refresh list
+                            bluetoothManager.loadKnownPeripheralsFromUserDefaults()
                             bluetoothManager.startScanningForKnownDevices()
                         }
                     }) {
@@ -73,15 +80,16 @@ struct ConnectView: View {
                     Button {
                         isPresentingAddDeviceSheet = true
                     } label: {
-                        Image(systemName: "plus.circle.fill") // More prominent icon
+                        Image(systemName: "plus.circle.fill")
                             .imageScale(.large)
                     }
+                    .disabled(isFullyConnected()) // Disable if already connected
                 }
             }
             .sheet(isPresented: $isPresentingAddDeviceSheet) {
                 AddDeviceView(bluetoothManager: bluetoothManager)
             }
-            .alert(item: $peripheralToForget) { peripheralToConfirmForget in // Use .alert(item: ...)
+            .alert(item: $peripheralToForget) { peripheralToConfirmForget in
                 Alert(
                     title: Text("Forget Device"),
                     message: Text("Are you sure you want to forget \(peripheralToConfirmForget.name)? This will remove it from the app's known list and disconnect if currently connected."),
@@ -91,30 +99,21 @@ struct ConnectView: View {
                         }
                     },
                     secondaryButton: .cancel() {
-                        self.peripheralToForget = nil // Clear selection on cancel
+                        self.peripheralToForget = nil
                     }
                 )
             }
             .onAppear {
-                 // If not connected and not already scanning for known, start scanning.
                  if bluetoothManager.connectedPeripheralInfo == nil &&
-                    bluetoothManager.currentScanMode == .none && // only if not already scanning
-                    bluetoothManager.connectionState == .idle { // and truly idle
+                    bluetoothManager.currentScanMode == .none &&
+                    bluetoothManager.connectionState == .idle {
                      bluetoothManager.startScanningForKnownDevices()
                  }
             }
-            // Dismiss AddDeviceSheet when a connection is successful from the sheet
             .onReceive(bluetoothManager.$connectionState) { state in
                 if case .connected = state, isPresentingAddDeviceSheet {
-                    // Check if the connected device was from the pairing list
-                    if let connectedInfo = bluetoothManager.connectedPeripheralInfo,
-                       !bluetoothManager.knownPeripherals.contains(where: { $0.id == connectedInfo.id && $0.isBonded && $0.isConnected }) {
-                        // This condition is a bit complex. Simpler: if sheet is up and we connect, close it.
-                         isPresentingAddDeviceSheet = false
-                    } else if bluetoothManager.connectedPeripheralInfo != nil {
-                        // Generic case: if sheet is up and we are now connected to *any* device successfully.
-                        isPresentingAddDeviceSheet = false
-                    }
+                    // This logic might still be useful if the sheet was opened just before auto-connect.
+                    isPresentingAddDeviceSheet = false
                 }
             }
         }
@@ -158,8 +157,6 @@ struct ConnectView: View {
                 }
             case .idle, .scanningKnown, .scanningPairing:
                 if bluetoothManager.knownPeripherals.contains(where: {$0.isConnected}) {
-                     // Should not happen if state is idle/scanning but something is connected.
-                     // This implies a state mismatch. For now, show generic not connected.
                      Text("Not connected.")
                         .font(.footnote)
                         .foregroundColor(.red)
@@ -170,7 +167,7 @@ struct ConnectView: View {
                 }
             }
         }
-        .frame(height: 20) // Give it a consistent height
+        .frame(height: 20)
     }
 }
 
