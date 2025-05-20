@@ -123,7 +123,7 @@ struct AddDeviceView: View {
     }
 }
 
-struct InstructionsView: View { // Assuming this is defined as before
+struct InstructionsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Pairing Instructions:")
@@ -131,25 +131,30 @@ struct InstructionsView: View { // Assuming this is defined as before
             HStack(alignment: .top) {
                 Text("1.").bold().frame(width: 20, alignment: .leading)
                 Text("Ensure your FlySight 2 is turned OFF (LED is off).")
+                    .fixedSize(horizontal: false, vertical: true) // Allow text to wrap
             }
             HStack(alignment: .top) {
                 Text("2.").bold().frame(width: 20, alignment: .leading)
                 Text("Quickly press the power button **two times**.")
+                    .fixedSize(horizontal: false, vertical: true) // Allow text to wrap
             }
             HStack(alignment: .top) {
                 Text("3.").bold().frame(width: 20, alignment: .leading)
                 Text("The **GREEN LED** will pulse slowly. This is Pairing Request Mode and lasts for 30 seconds or until connected.")
+                    .fixedSize(horizontal: false, vertical: true) // Allow text to wrap
             }
              HStack(alignment: .top) {
                 Text("4.").bold().frame(width: 20, alignment: .leading)
                 Text("Your FlySight should appear below. Tap 'Connect & Pair'.")
+                    .fixedSize(horizontal: false, vertical: true) // Allow text to wrap
             }
             HStack(alignment: .top) {
                 Text("5.").bold().frame(width: 20, alignment: .leading)
                 Text("Accept the pairing request from iOS when it appears.")
+                    .fixedSize(horizontal: false, vertical: true) // Allow text to wrap
             }
         }
-        .padding(.vertical, 5)
+        .padding(.vertical, 5) // Keep existing padding or adjust as needed for overall view
     }
 }
 
